@@ -1,0 +1,6 @@
+package com.ar.Grupo3.data.factory.interfaces;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface Basics<PDAO> extends JpaRepository<PDAO, Integer> {
+}

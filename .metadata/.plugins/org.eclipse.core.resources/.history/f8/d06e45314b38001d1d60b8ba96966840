@@ -1,0 +1,21 @@
+package com.ar.Grupo3.data.factory.interfaces;
+
+public interface PlantillaDAO<PADO> {
+
+	public PDAO selectPorId(Long id);
+
+    public Integer contarTodos();
+
+    public void agregar(PDAO p);
+
+    public void modificar(PDAO p);
+
+    public void borrar(PDAO p);
+
+    public List<PDAO> SelectLikeTodos(String nombre);
+    
+    public List<PDAO> SelectLikeTodos(Long numero);
+
+    public List<PDAO> SelectTodos();
+	
+}

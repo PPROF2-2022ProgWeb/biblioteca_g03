@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="botonera">
+    <app-button bordered square centered (onClick)="openModal()">
+      Agregar usuario
+    </app-button>
+    <app-button
+      bordered
+      square
+      centered
+      (onClick)="startEdit()"
+      [disabled]="!UsuarioSeleccionado"
+    >
+      Editar usuario
+    </app-button>
+  </div>
+
+  <div class="card">
+    <div #contenedorTabla>
+      <data-table
+        *ngIf="Usuarios.length > 0"
+        [source]="Usuarios"
+        [columns]="tableColumns"
+        tableStyle="bordered"
+        [maxHeight]="500"
+        (selectionChanged)="cargarDetalleUsuario($event)"
+      ></data-table>
+    </div>
+    <app-aviso
+      *ngIf="Usuarios.length === 0"
+      titulo="Tabla de Usuarios"
+      mensaje="Aqui se mostraran los usuarios que se carguen desde la base de datos"
+    ></app-aviso>
+  </div>
+
+  <div class="card detalle">
+    <app-detalle-usuario
+      *ngIf="UsuarioSeleccionado"
+      [usuario]="UsuarioSeleccionado"
+    ></app-detalle-usuario>
+    <app-aviso
+      *ngIf="!UsuarioSeleccionado"
+      titulo="Detalles del Usuario"
+      mensaje="Aqui se mostraran los detalles del Usuario que seleccione en la tabla"
+    ></app-aviso>
+    <div class="action">
+      <app-button
+        *ngIf="UsuarioSeleccionado"
+        square
+        centered
+        bordered
+        (onClick)="eliminarUsuario()"
+      >
+        Eliminar usuario
+      </app-button>
+    </div> 
+  </div>
+
+  <app-modal [(isOpen)]="isModalOpen">
+    <app-fm-usuario
+      [titulo]="tituloModal"
+      [usuario]="isEditing ? UsuarioSeleccionado : undefined"
+      (onCancel)="onCancel()"
+      (onSubmit)="onSubmit($event)"
+    ></app-fm-usuario>
+  </app-modal>
+</div>

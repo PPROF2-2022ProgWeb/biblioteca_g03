@@ -1,0 +1,16 @@
+package com.ar.Grupo3.data.objects.interfaces;
+
+
+import java.util.List;
+
+import org.springframework.data.repository.Repository;
+
+import com.ar.Grupo3.model.Libro;
+
+public interface DaoLibroIntf extends Repository<Libro, Long>  {
+
+	List<Libro> findAll();
+	Libro findAll(Long id);
+	Libro save(Libro l);
+	void delete(Libro l);
+}

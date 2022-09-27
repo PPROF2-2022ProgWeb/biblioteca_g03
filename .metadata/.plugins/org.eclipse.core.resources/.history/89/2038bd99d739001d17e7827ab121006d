@@ -1,0 +1,70 @@
+package com.ar.Grupo3.service.wservice;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.ar.Grupo3.data.factory.FabricaDAO;
+import com.ar.Grupo3.data.objects.classes.DaoUsuarioImpl;
+import com.ar.Grupo3.model.Usuario;
+
+public class WServiceUsuario implements Serializable {
+
+	private static final long serialVersionUID = -312339292846758441L;
+	
+	@Autowired
+	private DaoUsuarioImpl servicioUsuario = FabricaDAO.obtenerUsuario();
+	
+	 public WServiceUsuario() {
+	        //constructor vacio
+	    }
+
+	// Bucamos todos las Usuarioes
+	public List<Usuario> mostrarUsuarios() {
+		return servicioUsuario.SelectTodos();
+	}
+
+	// Buscamos un Usuario por ID
+	public Optional<?> buscarUsuarioPorId(Long id) {
+		return servicioUsuario.selectPorId(id);
+	}
+
+	// Agregamos un por ID
+	public Usuario agregamosUsuario(Usuario Usuario) {
+		servicioUsuario.agregar(Usuario);
+		return Usuario;
+	}
+
+	// modificamos Usuario
+	public void modificamosUsuario(Usuario UsuarioModificado, Long id) {
+		// Verificamos que no nos llegue nulo el id
+		if (id != null) {
+			Optional<?> busca = servicioUsuario.selectPorId(id);
+			// Ahora si modificamos la Usuario
+			if (busca != null) {
+				servicioUsuario.modificar(UsuarioModificado);
+			}
+		}
+	}
+
+	// Eliminamos la Usuario, no se para que esto dudo que pase a menos que...
+	public Integer EliminarUsuario(Long id) {
+		Integer aux = 1;
+		// nos fijamos que no nos llegue nulo
+		try {
+			if (id != null) {
+				Usuario elimina = new Usuario(id);
+				// eliminar el Usuario
+				if (elimina != null) {
+					servicioUsuario.borrar(elimina);
+					aux = 0;
+				}
+			}
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		return aux;
+	}
+
+}

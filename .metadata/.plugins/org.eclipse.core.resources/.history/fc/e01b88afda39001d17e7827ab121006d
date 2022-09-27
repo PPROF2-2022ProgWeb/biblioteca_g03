@@ -1,0 +1,119 @@
+package com.ar.Grupo3.service.wservice;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.ar.Grupo3.data.factory.FabricaDAO;
+import com.ar.Grupo3.data.objects.interfaces.DaoDevolucionIntf;
+import com.ar.Grupo3.model.Devolucion;
+
+public class WServiceDevolucion implements Serializable {
+
+	private static final long serialVersionUID = -6850270540912061541L;
+
+	@Autowired
+	private DaoDevolucionIntf servicioDevolucion = FabricaDAO.obtenerDevolucion();
+
+	/*
+	 * ----------------------------------------------------------------------------
+	 * Devolucion
+	 * ----------------------------------------------------------------------------
+	 */
+	@GetMapping(path = "/devolucion")
+	public List<Devolucion> mostrarDevoluciones() {
+		List<Devolucion> listaDevoluciones = mostrarDevoluciones();
+		return listaDevoluciones;
+	}
+
+	@GetMapping(path = "/devolucion/{id}")
+	public Optional<?> buscarDevolucion(@PathVariable("id") Long id) {
+		return buscarDevolucionPorId(id);
+	}
+
+	@PostMapping(path = "/devolucion/agregar")
+	public Devolucion AgregarDevolucion(Devolucion devolucion) {
+		return agregamosDevolucion(devolucion);
+	}
+
+	@PutMapping(path = "/devolucion/modificar/{id}")
+	public ResponseEntity<Devolucion> modificarDevolucion(@PathVariable("id") Long id,
+			@RequestBody Devolucion devolucion) {
+		if (devolucion != null) {
+			modificamosDevolucion(devolucion, id);
+			return new ResponseEntity<Devolucion>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Devolucion>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping(path = "/devolucion/eliminar/{id}")
+	public ResponseEntity<Devolucion> eliminarDevolucion(@PathVariable("id") Long id) {
+
+		int var = EliminarDevolucion(id);
+		if (var != 0) {
+			return new ResponseEntity<Devolucion>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Devolucion>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	// Bucamos todos las Devoluciones
+	public List<Devolucion> mostrarDevoluciones() {
+		return servicioDevolucion.SelectTodos();
+	}
+
+	// Buscamos un devolucion por ID
+	public Optional<?> buscarDevolucionPorId(Long id) {
+		return servicioDevolucion.selectPorId(id);
+	}
+
+	// Agregamos un por ID
+	public Devolucion agregamosDevolucion(Devolucion devolucion) {
+		servicioDevolucion.agregar(devolucion);
+		return devolucion;
+	}
+
+	// modificamos devolucion
+	public void modificamosDevolucion(Devolucion devolucionModificado, Long id) {
+		// Verificamos que no nos llegue nulo el id
+		if (id != null) {
+			Optional<?> busca = servicioDevolucion.selectPorId(id);
+			// Ahora si modificamos la devolucion
+			if (busca != null) {
+				servicioDevolucion.modificar(devolucionModificado);
+			}
+		}
+	}
+
+	// Eliminamos la devolucion, no se para que esto dudo que pase a menos que...
+	public Integer EliminarDevolucion(Long id) {
+		Integer aux = 1;
+		// nos fijamos que no nos llegue nulo
+		try {
+			if (id != null) {
+				Devolucion elimina = new Devolucion(id);
+				// eliminar el Devolucion
+				if (elimina != null) {
+					servicioDevolucion.borrar(elimina);
+					aux = 0;
+				}
+			}
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		return aux;
+	}
+
+}

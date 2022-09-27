@@ -1,0 +1,9 @@
+package com.ar.Grupo3.data.objects.interfaces;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ar.Grupo3.model.Reporte;
+
+public interface DaoReporteIntf extends JpaRepository<Reporte, Long> {
+
+}

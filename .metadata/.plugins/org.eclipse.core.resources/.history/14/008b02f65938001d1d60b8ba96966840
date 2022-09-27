@@ -1,0 +1,49 @@
+package com.ar.Grupo3.data.objects.classes;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.ar.Grupo3.data.objects.interfaces.DaoReporteIntf;
+import com.ar.Grupo3.model.Reporte;
+
+public class DaoReporteImpl implements DaoReporteIntf, Serializable {
+
+	private static final long serialVersionUID = 3132062087653960830L;
+
+	@Override
+	public Reporte selectPorId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer contarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void agregar(Reporte p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void modificar(Reporte p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void borrar(Reporte p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Reporte> SelectTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

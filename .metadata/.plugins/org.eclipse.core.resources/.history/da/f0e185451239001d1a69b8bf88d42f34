@@ -1,0 +1,20 @@
+package com.ar.Grupo3.data.factory.classes;
+
+
+import javax.persistence.Entity;
+
+@Entity
+public abstract class ClaseBase<Long> {
+
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
+}

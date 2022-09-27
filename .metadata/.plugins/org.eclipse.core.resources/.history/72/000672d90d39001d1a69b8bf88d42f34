@@ -1,0 +1,175 @@
+package com.ar.Grupo3.main;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ar.Grupo3.data.factory.classes.DaoFabrica;
+import com.ar.Grupo3.data.objects.interfaces.*;
+import com.ar.Grupo3.model.*;
+
+public class test {
+	
+	private static DaoReporteIntf servicioReporte = DaoFabrica.obtenerReporte();
+	private static DaoLibroIntf servicioLibros = DaoFabrica.obtenerlibro();
+	private static DaoPrestamosIntf servicioPrestamos = DaoFabrica.obtenerPrestamos();
+	private static DaoDevolucionIntf servicioDevolucion = DaoFabrica.obtenerDevolucion();
+	private static DaoUsuarioIntf servicioUsuario = DaoFabrica.obtenerUsuario();
+
+	public static void main(String[] args) {
+
+        List<Libro> libros = servicioLibros.SelectTodos();
+
+        for (Libro libro : libros) {
+            System.out.println("Libros: " + libro.getTitulo());
+        }
+
+        System.out.println("Ahora mostramos los usuarios");
+
+        List<Usuario> usuarios = servicioUsuario.SelectTodos();
+
+        for (Usuario usuario : usuarios) {
+            System.out.println("Usuarios: " + usuario.getApellidousuario());
+        }
+
+        //Como agregar un Libro
+        System.out.println("Agregar un libro");
+        Libro milibro1 = new Libro(null, "Campera", "santillana", "Aprendisaje", 
+                "santillana", "es-en", "234", "Libro de aprendiasaje", 80L, 56L);
+        Libro milibro2 = new Libro(null, "SobreMatematicas", "MathMe", "Aprendisaje", 
+                "santillana", "es-en", "2567", "Libro de estimacion", 100L, 67L);
+        Libro milibro3 = new Libro(null, "SobreLengua", "santillana", "Aprendisaje", 
+                "Etios", "es-en", "6578", "Libro de Compresion", 100L, 90L);
+        Libro milibro4 = new Libro(null, "SobreElChisme", "santillana", "Aprendisaje", 
+                "Verde S.a", "es-en", "765", "Libro de mierda", 456L, 100L);
+        Libro milibro5 = new Libro(null, "SobreLavida", "santillana", "Aprendisaje", 
+                "Giles S.A.", "es-en", "458", "Libro de Giles", 45L, 2L);
+        
+        servicioLibros.agregar(milibro1);
+        servicioLibros.agregar(milibro2);
+        servicioLibros.agregar(milibro3);
+        servicioLibros.agregar(milibro4);
+        servicioLibros.agregar(milibro5);
+        
+        List<Libro> mislibros = servicioLibros.SelectTodos();
+        
+         for (Libro elLibro : mislibros) {
+            System.out.println("Libros: " + elLibro.getTitulo());
+        }
+        
+        //Como agregar un usuario
+        System.out.println("Agregamos un usuario");
+        Usuario nuevo = new Usuario();
+        nuevo.setApellidousuario("Garcia");
+        nuevo.setNombre("Violin");
+        nuevo.setDomicilio("Bear 760");
+        nuevo.setTelefono("4602679");
+        nuevo.setSancionesMonetarias(1L);
+        nuevo.setSanciones(1L);
+
+        //Como agregar un usuario
+        System.out.println("Agregamos un usuario");
+        Usuario nuevo2 = new Usuario();
+        nuevo2.setApellidousuario("Gomes");
+        nuevo2.setNombre("Bardo");
+        nuevo2.setDomicilio("Ajo 670");
+        nuevo2.setTelefono("4602679");
+        nuevo2.setSancionesMonetarias(0L);
+        nuevo2.setSanciones(0L);
+
+        //Como agregar un usuario
+        System.out.println("Agregamos un usuario");
+        Usuario nuevo3 = new Usuario();
+        nuevo3.setApellidousuario("Azul");
+        nuevo3.setNombre("Verde");
+        nuevo3.setDomicilio("esquina 760");
+        nuevo3.setTelefono("4602679");
+        nuevo3.setSancionesMonetarias(0L);
+        nuevo3.setSanciones(1L);
+
+        //Como agregar un usuario
+        System.out.println("Agregamos un usuario");
+        Usuario nuevo4 = new Usuario();
+        nuevo4.setApellidousuario("Sepamos");
+        nuevo4.setNombre("Peluca Sape Sape");
+        nuevo4.setDomicilio("Gil 3456");
+        nuevo4.setTelefono("4602679");
+        nuevo4.setSancionesMonetarias(0L);
+        nuevo4.setSanciones(0L);
+
+        servicioUsuario.agregar(nuevo);
+        servicioUsuario.agregar(nuevo2);
+        servicioUsuario.agregar(nuevo3);
+        servicioUsuario.agregar(nuevo4);
+
+        System.out.println("Nuevo usuario");
+
+        usuarios = servicioUsuario.SelectTodos();
+
+        for (Usuario usuario : usuarios) {
+            System.out.println("Usuarios: " + usuario.getApellidousuario());
+        }
+        //Como agregar un Prestamo
+        //Buscamos un libro existente y un usuario Existente
+        Usuario usuarioAfectado = usuarios.get(0);
+        Libro libroPrestado = libros.get(0);
+        Prestamos el_Prestamo = new Prestamos();
+
+        el_Prestamo.setFechaPrestamo("10 de abril");
+        el_Prestamo.setFechaRegreso("Algun dia");
+        el_Prestamo.setIdLibro(libroPrestado.getIdLibro());
+        el_Prestamo.setIdUsuario(usuarioAfectado.getIdUsuario());
+
+        servicioPrestamos.agregar(el_Prestamo);
+
+        System.out.println("Mostramos los prestamos");
+
+        List<Prestamos> prestamos = servicioPrestamos.SelectTodos();
+
+        for (Prestamos p : prestamos) {
+            System.out.println("Prestamos: " + p);
+        }
+        //Para agregar una devolucion
+//        List<Prestamos> prestamos = servicioPrestamos.SelectTodos();
+
+        Devolucion devolver = new Devolucion();
+        Usuario usuarioAfectadoDevolucion = usuarios.get(0);
+        Libro librodevuelto = libros.get(0);
+        Prestamos el_prestamo = prestamos.get(0);
+        devolver.setFechaRegreso("12 de abril del 2056");
+        devolver.setDescripcion("Devuelto sin hojas");
+        devolver.setIdLibro(librodevuelto.getIdLibro());
+        devolver.setIdUsuario(usuarioAfectadoDevolucion.getIdUsuario());
+        devolver.setIdPrestamo(el_prestamo.getIdPrestamo());
+
+        servicioDevolucion.agregar(devolver);
+        List<Devolucion> devoluciones = servicioDevolucion.SelectTodos();
+
+        for (Devolucion devolucione : devoluciones) {
+            System.out.println("Devoluciones: " + devolucione);
+        }
+        //Para agregar un Reporte 
+        List<Prestamos> prestamosReporte = servicioPrestamos.SelectTodos();
+        List<Devolucion> devolucionesReporte = servicioDevolucion.SelectTodos();
+
+        Usuario usuarioAReportear = usuarios.get(0);
+        Libro libroAReportar = libros.get(0);
+        Devolucion devolucionAReportar = devolucionesReporte.get(0);
+        Prestamos prestamoAReportar = prestamosReporte.get(0);
+        Reporte a_Reportar = new Reporte();
+
+        a_Reportar.setIdDevolucion(devolucionAReportar.getIdDevolucion());
+        a_Reportar.setIdLibro(libroAReportar.getIdLibro());
+        a_Reportar.setIdUsuario(usuarioAReportear.getIdUsuario());
+        a_Reportar.setIdPrestamo(prestamoAReportar.getIdPrestamo());
+
+        servicAOReporte.agregar(a_Reportar);
+
+        List<Reporte> reportes = servicAOReporte.SelectTodos();
+
+        for (Reporte reporte : reportes) {
+            System.out.println("Reportes: " + reporte);
+        }
+	}
+
+}

@@ -1,0 +1,12 @@
+package com.ar.Grupo3.data.objects.interfaces;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.ar.Grupo3.data.factory.interfaces.PlantillaDAO;
+import com.ar.Grupo3.model.Devolucion;
+
+@Repository
+public interface DaoDevolucionIntf extends PlantillaDAO<Devolucion>, JpaRepository<Devolucion, Long> {
+
+}

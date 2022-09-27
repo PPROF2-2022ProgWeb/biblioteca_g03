@@ -1,0 +1,47 @@
+package com.ar.Grupo3.data.objects.classes;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.ar.Grupo3.data.objects.interfaces.DaoUsuarioIntf;
+import com.ar.Grupo3.model.Usuario;
+
+public class DaoUsuarioImpl implements DaoUsuarioIntf, Serializable {
+
+	@Override
+	public Usuario selectPorId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer contarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void agregar(Usuario p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void modificar(Usuario p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void borrar(Usuario p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Usuario> SelectTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

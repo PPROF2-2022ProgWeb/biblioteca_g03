@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>{{titulo}}</h2>
+  <form [formGroup]="FormAgregarLibro" (ngSubmit)="onSubmit()">
+    <app-input-container [icon]="Iconos.LIBRO" title="Titulo">
+      <input type="text" placeholder="Ingrese el titulo" formControlName="titulo"/>
+    </app-input-container>
+    <app-input-container [icon]="Iconos.USUARIO" title="Autor">
+      <input type="text" placeholder="Ingrese el nombre del autor" formControlName="autor"/>
+    </app-input-container>
+    <app-input-container [icon]="Iconos.EDITOR" title="Descripcion">
+      <textarea type="text" placeholder="Ingrese la Descripcion" formControlName="descripcion"></textarea>
+    </app-input-container>
+    <app-input-container [icon]="Iconos.CATEGORIA" title="Categoria">
+      <input type="text" placeholder="Ingrese la categoria" formControlName="categoria"/>
+    </app-input-container>
+    <app-input-container [icon]="Iconos.EDITOR" title="Editorial">
+      <input type="text" placeholder="Ingrese el editorial" formControlName="editor" />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.IDIOMA" title="Idiomas">
+      <input type="text" placeholder="Ingrese los idiomas disponibles" formControlName="lenguajes" />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.LIBRO_ABIERTO" title="Paginas">
+      <input type="text" placeholder="Ingrese la cantidad de paginas" formControlName="paginas" />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.STOCK" title="Stock">
+      <input type="number" placeholder="Ingrese la cantidad de libros" formControlName="stock" />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.STOCK" title="Disponibles">
+      <input type="number" placeholder="Ingrese la cantidad de libros disponibles" formControlName="disponibles" />
+    </app-input-container>
+  
+    <app-button type="submit" square bordered>Aceptar</app-button>
+    <app-button type="reset" square inverted bordered (onClick)="onCancel()">Cancelar</app-button>
+  </form>
+</div>

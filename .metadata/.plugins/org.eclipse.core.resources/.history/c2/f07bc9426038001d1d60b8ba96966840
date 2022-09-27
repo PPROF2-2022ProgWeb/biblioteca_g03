@@ -1,0 +1,69 @@
+package com.ar.Grupo3.service;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
+import com.ar.Grupo3.data.objects.classes.DaoDevolucionImpl;
+import com.ar.Grupo3.model.Devolucion;
+
+public class WServiceDevolucion implements Serializable {
+
+	private DaoDevolucionImpl servicioDevolucion;
+	
+	 public WServiceDevolucion() {
+	        //constructor vacio
+	    }
+
+	// Bucamos todos las Devoluciones
+	public List<Devolucion> mostrarDevoluciones() {
+		return servicioDevolucion.SelectTodos();
+	}
+
+	// Buscamos un devolucion por ID
+	public Optional<?> buscardevolucionPorId(Integer id) {
+		return servicioDevolucion.selectPorId(id);
+	}
+
+	// Agregamos un por ID
+	public Devolucion agregamosDevolucion(Devolucion devolucion) {
+		servicioDevolucion.agregar(devolucion);
+		return devolucion;
+	}
+
+	// modificamos devolucion
+	public void modificamosDevolucion(Devolucion devolucionModificado, Integer id) {
+		// Verificamos que no nos llegue nulo el id
+		if (id != null) {
+			Optional<?> busca = servicioDevolucion.selectPorId(id);
+			// Ahora si modificamos la devolucion
+			if (busca != null) {
+				servicioDevolucion.modificar(devolucionModificado);
+			}
+		}
+	}
+
+	// Eliminamos la devolucion, no se para que esto dudo que pase a menos que...
+	public Devolucion EliminarDevolucion(Long id) {
+		// nos fijamos que no nos llegue nulo
+		if (id != null) {
+			Devolucion elimina = new Devolucion(id);
+			// eliminar el Devolucion
+			if (aux.isPresent()) {
+				servicioDevolucion.borrar(aux);
+				return aux;
+			}
+		}
+		return null;
+	}
+
+	// Bucamos todos los devolucion como un string
+	public List<Devolucion> SeleccionarDevolucionesComo(String texto) {
+		return servicioDevolucion.SelectLikeTodos(texto);
+	}
+
+	// Bucamos todos los devolucion como un numero
+	public List<Devolucion> SeleccionarDevolucionesComo(Long numero) {
+		return servicioDevolucion.SelectLikeTodos(numero);
+	}
+}

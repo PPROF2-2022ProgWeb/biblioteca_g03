@@ -1,0 +1,89 @@
+package com.ar.Grupo3.data.objects.classes;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.ar.Grupo3.data.factory.interfaces.commons.Basics;
+import com.ar.Grupo3.data.objects.interfaces.DaoDevolucionIntf;
+import com.ar.Grupo3.model.Devolucion;
+
+@Service
+public class DaoDevolucionImpl implements DaoDevolucionIntf, Serializable {
+
+	private static final long serialVersionUID = -1371128702457337684L;
+	
+	@Autowired
+	private Basics<Devolucion,Integer> dao;
+
+	@Override
+	public Optional<?> selectPorId(Integer id) {
+		
+		Optional<?> aux = null;
+		try {
+			aux = dao.findById(id);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		
+		return aux;
+	}
+
+	@Override
+	public Long contarTodos() {
+		long cantidad = 0;
+		
+		try {
+			cantidad = dao.count();
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}		
+		
+		return cantidad;
+	}
+
+	@Override
+	public void agregar(Devolucion p) {
+		try {
+			dao.save(p);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+	}
+
+	@Override
+	public void modificar(Devolucion p) {
+		try {
+			if(p.getIdDevolucion() != null) {
+				throw new Exception("El objeto a persistir no tiene identificador");
+			}
+			dao.save(p);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+	}
+
+	@Override
+	public void borrar(Devolucion p) {
+		try {
+			dao.delete(p);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+	}
+
+	@Override
+	public List<Devolucion> SelectTodos() {
+		List<Devolucion> list = null;
+		try {
+			list = dao.findAll();
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		return list;
+	}
+
+}

@@ -1,0 +1,25 @@
+.input-container {
+    position: relative;
+    display: flex;
+    background-color: #00324A;
+    align-items: center;
+}
+
+.input-container i {
+    color: #fff;
+    margin: .5rem 1rem;
+    font-size: 16px;
+    text-align: center;
+}
+
+:host /deep/ input,
+:host /deep/ select,
+:host /deep/ textarea {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+    outline: none;
+    border-radius: 0;
+    height: 100%;
+    flex: 1;
+    margin: 0;
+}

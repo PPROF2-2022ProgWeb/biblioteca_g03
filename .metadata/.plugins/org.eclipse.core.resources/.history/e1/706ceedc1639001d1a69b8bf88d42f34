@@ -1,0 +1,19 @@
+package com.ar.Grupo3.data.factory;
+
+import java.io.Serializable;
+
+import com.ar.Grupo3.data.objects.classes.*;
+
+public class FabricaDAO implements Serializable {
+	
+	private static final long serialVersionUID = -93933310251647313L;
+	
+	private static DaoLibroImpl daoLibroImpl;
+	public static DaoLibroImpl obtenerLibro() {
+		if(daoLibroImpl == null) {
+			daoLibroImpl = new DaoLibroImpl();
+		}
+		return daoLibroImpl;
+	}
+
+}

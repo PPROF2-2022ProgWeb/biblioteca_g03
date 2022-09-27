@@ -1,0 +1,66 @@
+package com.ar.Grupo3.data.objects.classes;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.logging.Level;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ar.Grupo3.data.factory.interfaces.commons.Basics;
+import com.ar.Grupo3.data.objects.interfaces.DaoDevolucionIntf;
+import com.ar.Grupo3.model.Devolucion;
+
+@Service
+public class DaoDevolucionImpl implements DaoDevolucionIntf, Serializable {
+
+	private static final long serialVersionUID = -1371128702457337684L;
+	
+	@Autowired
+	private Basics<Devolucion> dao;
+
+	@Override
+	public Devolucion selectPorId(Long id) {
+		
+		return null;
+	}
+
+	@Override
+	public Long contarTodos() {
+		long cantidad = 0;
+		
+		try {
+			cantidad = dao.count();
+		} catch (Exception e) {
+			Logger.getLogger(DaoDevolucionImpl.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+		
+		return cantidad;
+	}
+
+	@Override
+	public void agregar(Devolucion p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void modificar(Devolucion p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void borrar(Devolucion p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Devolucion> SelectTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,69 @@
+package com.ar.Grupo3.service.wservice;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.ar.Grupo3.data.factory.FabricaDAO;
+import com.ar.Grupo3.data.objects.interfaces.DaoPrestamosIntf;
+import com.ar.Grupo3.model.Prestamos;
+
+public class WServicePrestamos implements Serializable {
+
+	private static final long serialVersionUID = -2402851410237303555L;
+
+	@Autowired
+	private DaoPrestamosIntf servicioPrestamos = FabricaDAO.obtenerPrestamos();
+	
+	 public WServicePrestamos() {
+	        //constructor vacio
+	    }
+
+	// Bucamos todos las Prestamoses
+	public List<Prestamos> mostrarPrestamos() {
+		return servicioPrestamos.SelectTodos();
+	}
+
+	// Buscamos un Prestamos por ID
+	public Optional<?> buscarPrestamosPorId(Long id) {
+		return servicioPrestamos.selectPorId(id);
+	}
+
+	// Agregamos un por ID
+	public Prestamos agregamosPrestamos(Prestamos Prestamos) {
+		servicioPrestamos.agregar(Prestamos);
+		return Prestamos;
+	}
+
+	// modificamos Prestamos
+	public void modificamosPrestamos(Prestamos PrestamosModificado, Long id) {
+		// Verificamos que no nos llegue nulo el id
+		if (id != null) {
+			Optional<?> busca = servicioPrestamos.selectPorId(id);
+			// Ahora si modificamos la Prestamos
+			if (busca != null) {
+				servicioPrestamos.modificar(PrestamosModificado);
+			}
+		}
+	}
+
+	// Eliminamos la Prestamos, no se para que esto dudo que pase a menos que...
+	public Integer EliminarPrestamos(Long id) {
+		Integer aux = 1;
+		// nos fijamos que no nos llegue nulo
+		try {
+			if (id != null) {
+				Prestamos elimina = new Prestamos(id);
+				// eliminar el Prestamos
+				if (elimina != null) {
+					servicioPrestamos.borrar(elimina);
+					aux = 0;
+				}
+			}
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		return aux;
+	}
+}

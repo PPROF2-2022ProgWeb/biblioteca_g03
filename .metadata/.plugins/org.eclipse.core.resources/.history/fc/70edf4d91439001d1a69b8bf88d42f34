@@ -1,0 +1,90 @@
+package com.ar.Grupo3.data.objects.classes;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ar.Grupo3.data.factory.interfaces.PlantillaDAO;
+import com.ar.Grupo3.data.objects.interfaces.DaoReporteIntf;
+import com.ar.Grupo3.model.Reporte;
+
+@Service
+public class DaoReporteImpl implements PlantillaDAO, Serializable {
+
+	private static final long serialVersionUID = 3132062087653960830L;
+	
+	@Autowired
+	private DaoReporteIntf dao;
+
+	@Override
+	public Optional<?> selectPorId(Integer id) {
+		
+		Optional<?> aux = null;
+		try {
+			aux = dao.findById(id);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		
+		return aux;
+	}
+
+	@Override
+	public Long contarTodos() {
+		long cantidad = 0;
+		
+		try {
+			cantidad = dao.count();
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}		
+		
+		return cantidad;
+	}
+
+	@Override
+	public void agregar(Reporte p) {
+		try {
+			dao.save(p);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+	}
+
+	@Override
+	public void modificar(Reporte p) {
+		try {
+			if(p.getIdPrestamo() != null) {
+				throw new Exception("El objeto a persistir no tiene identificador");
+			}
+			dao.save(p);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+	}
+
+	@Override
+	public void borrar(Reporte p) {
+		try {
+			
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+	}
+
+	@Override
+	public List<Reporte> SelectTodos() {
+		List<Reporte> list = null;
+		try {
+			list = dao.findAll();
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		return list;
+	}
+
+}

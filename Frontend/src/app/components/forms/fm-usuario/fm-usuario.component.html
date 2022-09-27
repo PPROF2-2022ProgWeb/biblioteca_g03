@@ -1,0 +1,52 @@
+<div class="container">
+  <h2>{{ titulo }}</h2>
+  <form [formGroup]="FormAgregarUsuario" (ngSubmit)="onSubmit()">
+    <app-input-container [icon]="Iconos.USUARIO" title="Nombre">
+      <input
+        type="text"
+        placeholder="Ingrese el nombre"
+        formControlName="nombre"
+      />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.USUARIO" title="Apellido">
+      <input
+        type="text"
+        placeholder="Ingrese el apellido"
+        formControlName="apellido"
+      />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.MUNDO" title="Domicilio">
+      <input
+        type="text"
+        placeholder="Ingrese la Domicilio"
+        formControlName="domicilio"
+      />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.TELEFONO" title="Telefono">
+      <input
+        type="text"
+        placeholder="Ingrese la telefono"
+        formControlName="telefono"
+      />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.EDITOR" title="Sanciones">
+      <input
+        type="number"
+        placeholder="Ingrese la cantidad de sanciones"
+        formControlName="sanciones"
+      />
+    </app-input-container>
+    <app-input-container [icon]="Iconos.IDIOMA" title="Idiomas">
+      <input
+        type="number"
+        placeholder="Ingrese las sanciones monetarias"
+        formControlName="sanciones_monetarias"
+      />
+    </app-input-container>
+
+    <app-button type="submit" square bordered>Aceptar</app-button>
+    <app-button type="reset" square inverted bordered (onClick)="onCancel()"
+      >Cancelar</app-button
+    >
+  </form>
+</div>

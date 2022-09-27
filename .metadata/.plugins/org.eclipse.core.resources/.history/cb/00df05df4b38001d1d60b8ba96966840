@@ -1,0 +1,5 @@
+package com.ar.Grupo3.data.objects.interfaces;
+
+public interface DaoDevolucionInt {
+
+}

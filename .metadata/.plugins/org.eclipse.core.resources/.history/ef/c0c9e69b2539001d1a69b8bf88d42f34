@@ -1,0 +1,257 @@
+package com.ar.Grupo3.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.ar.Grupo3.data.objects.classes.DaoLibroImpl;
+import com.ar.Grupo3.data.objects.interfaces.DaoLibroIntf;
+import com.ar.Grupo3.model.*;
+import com.ar.Grupo3.service.wservice.*;
+
+//Aqui va el puerto de tu Cliente Angular
+@RestController
+@RequestMapping({ "/Biblioteca" })
+public class WServiceBibliotecaGestion {
+
+	// Campos
+//	@Autowired
+//	private WServiceLibro ServicioBibiotecaLibro = new WServiceLibro();
+
+	@Autowired
+	private WServiceDevolucion ServicioBibiotecaDevolucion = new WServiceDevolucion();
+	
+	@Autowired
+	private WServicePrestamos ServicioBibiotecaPrestamo = new WServicePrestamos();
+	
+	@Autowired
+	private WServiceReporte ServicioBibiotecaReporte = new WServiceReporte();
+	
+	@Autowired
+	private WServiceUsuario ServicioBibiotecaUsuarios = new WServiceUsuario();
+
+	@Autowired
+	private DaoLibroIntf servicioLibro;
+
+	@GetMapping(path = "/libro")
+	public List<Libro> mostrarLibros() {
+		List<Libro> listaLibros = ServicioBibiotecaLibro.mostrarLibros();
+		return listaLibros;
+	}
+	/*
+	 * ----------------------------------------------------------------------------
+	 * Libros
+	 * ----------------------------------------------------------------------------
+	 */
+//    @GetMapping(path = "/libro")
+//    public List<Libro> mostrarLibros() {
+//        List<Libro> listaLibros = ServicioBibiotecaLibro.mostrarLibros();
+//        return listaLibros;
+//    }
+//    
+//    @GetMapping(path = "/libro/{id}")
+//    public Optional<?> buscarLibro(@PathVariable("id") Long id) {
+//        return ServicioBibiotecaLibro.buscarLibroPorId(id);
+//    }
+//
+//    @PostMapping(path = "/libro/agregar")
+//    public Libro AgregarLibro(Libro libro) {
+//        return ServicioBibiotecaLibro.agregamosLibro(libro);
+//    }
+//
+//    @PutMapping(path = "/libro/modificar/{id}")
+//    public ResponseEntity<Libro> modificarLibro(
+//    		@PathVariable("id") Long id,
+//    		@RequestBody Libro libro) {
+//        if (libro != null) {
+//            ServicioBibiotecaLibro.modificamosLibro(libro, id);
+//            return new ResponseEntity<Libro>(HttpStatus.OK);
+//        } else {
+//        	return new ResponseEntity<Libro>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+//
+//    @DeleteMapping(path = "/libro/eliminar/{id}")
+//    public ResponseEntity<Libro>  eliminarLibro(@PathVariable("id") Long id) {
+//
+//        int var = ServicioBibiotecaLibro.EliminarLibro(id);
+//        if (var != 0) {
+//        	return new ResponseEntity<Libro>(HttpStatus.OK);
+//        } else {
+//        	return new ResponseEntity<Libro>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+
+	/*
+	 * ----------------------------------------------------------------------------
+	 * Devolucion
+	 * ----------------------------------------------------------------------------
+	 */
+	@GetMapping(path = "/devolucion")
+	public List<Devolucion> mostrarDevoluciones() {
+		List<Devolucion> listaDevoluciones = ServicioBibiotecaDevolucion.mostrarDevoluciones();
+		return listaDevoluciones;
+	}
+
+	@GetMapping(path = "/devolucion/{id}")
+	public Optional<?> buscarDevolucion(@PathVariable("id") Long id) {
+		return ServicioBibiotecaDevolucion.buscarDevolucionPorId(id);
+	}
+
+	@PostMapping(path = "/devolucion/agregar")
+	public Devolucion AgregarDevolucion(Devolucion devolucion) {
+		return ServicioBibiotecaDevolucion.agregamosDevolucion(devolucion);
+	}
+
+	@PutMapping(path = "/devolucion/modificar/{id}")
+	public ResponseEntity<Devolucion> modificarDevolucion(@PathVariable("id") Long id,
+			@RequestBody Devolucion devolucion) {
+		if (devolucion != null) {
+			ServicioBibiotecaDevolucion.modificamosDevolucion(devolucion, id);
+			return new ResponseEntity<Devolucion>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Devolucion>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping(path = "/devolucion/eliminar/{id}")
+	public ResponseEntity<Devolucion> eliminarDevolucion(@PathVariable("id") Long id) {
+
+		int var = ServicioBibiotecaDevolucion.EliminarDevolucion(id);
+		if (var != 0) {
+			return new ResponseEntity<Devolucion>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Devolucion>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	/*
+	 * ----------------------------------------------------------------------------
+	 * Prestamo
+	 * ----------------------------------------------------------------------------
+	 */
+	@GetMapping(path = "/prestamo")
+	public List<Prestamos> mostrarPrestamos() {
+		List<Prestamos> listaPrestamos = ServicioBibiotecaPrestamo.mostrarPrestamos();
+		return listaPrestamos;
+	}
+
+	@GetMapping(path = "/prestamo/{id}")
+	public Optional<?> buscarPrestamos(@PathVariable("id") Long id) {
+		return ServicioBibiotecaPrestamo.buscarPrestamosPorId(id);
+	}
+
+	@PostMapping(path = "/prestamo/agregar")
+	public Prestamos AgregarPrestamos(Prestamos prestamos) {
+		return ServicioBibiotecaPrestamo.agregamosPrestamos(prestamos);
+	}
+
+	@PutMapping(path = "/prestamo/modificar/{id}")
+	public ResponseEntity<Prestamos> modificarPrestamos(@PathVariable("id") Long id, @RequestBody Prestamos prestamos) {
+		if (prestamos != null) {
+			ServicioBibiotecaPrestamo.modificamosPrestamos(prestamos, id);
+			return new ResponseEntity<Prestamos>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Prestamos>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping(path = "/prestamo/eliminar/{id}")
+	public ResponseEntity<Prestamos> eliminarPrestamos(@PathVariable("id") Long id) {
+
+		int var = ServicioBibiotecaPrestamo.EliminarPrestamos(id);
+		if (var != 0) {
+			return new ResponseEntity<Prestamos>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Prestamos>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	/*
+	 * ----------------------------------------------------------------------------
+	 * Reporte
+	 * ----------------------------------------------------------------------------
+	 */
+	@GetMapping(path = "/reporte")
+	public List<Reporte> mostrarReportes() {
+		List<Reporte> listaReporte = ServicioBibiotecaReporte.mostrarReportees();
+		return listaReporte;
+	}
+
+	@GetMapping(path = "/reporte/{id}")
+	public Optional<?> buscarReportes(@PathVariable("id") Long id) {
+		return ServicioBibiotecaReporte.buscarReportePorId(id);
+	}
+
+	@PostMapping(path = "/reporte/agregar")
+	public Reporte AgregarReporte(Reporte reporte) {
+		return ServicioBibiotecaReporte.agregamosReporte(reporte);
+	}
+
+	@PutMapping(path = "/reporte/modificar/{id}")
+	public ResponseEntity<Reporte> modificarReportes(@PathVariable("id") Long id, @RequestBody Reporte reporte) {
+		if (reporte != null) {
+			ServicioBibiotecaReporte.modificamosReporte(reporte, id);
+			return new ResponseEntity<Reporte>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Reporte>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping(path = "/reporte/eliminar/{id}")
+	public ResponseEntity<Prestamos> eliminarReporte(@PathVariable("id") Long id) {
+
+		int var = ServicioBibiotecaReporte.EliminarReporte(id);
+		if (var != 0) {
+			return new ResponseEntity<Prestamos>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Prestamos>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	/*
+	 * ----------------------------------------------------------------------------
+	 * Usuario
+	 * ----------------------------------------------------------------------------
+	 */
+	@GetMapping(path = "/usuario")
+	public List<Usuario> mostrarUsuarios() {
+		List<Usuario> listaReporte = ServicioBibiotecaUsuarios.mostrarUsuarios();
+		return listaReporte;
+	}
+
+	@GetMapping(path = "/usuario/{id}")
+	public Optional<?> buscarUsuarios(@PathVariable("id") Long id) {
+		return ServicioBibiotecaUsuarios.buscarUsuarioPorId(id);
+	}
+
+	@PostMapping(path = "/usuario/agregar")
+	public Usuario AgregarUsuario(Usuario usuario) {
+		return ServicioBibiotecaUsuarios.agregamosUsuario(usuario);
+	}
+
+	@PutMapping(path = "/usuario/modificar/{id}")
+	public ResponseEntity<Usuario> modificarUsuario(@PathVariable("id") Long id, @RequestBody Usuario usuario) {
+		if (usuario != null) {
+			ServicioBibiotecaUsuarios.modificamosUsuario(usuario, id);
+			return new ResponseEntity<Usuario>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping(path = "/usuario/eliminar/{id}")
+	public ResponseEntity<Usuario> eliminarUsuario(@PathVariable("id") Long id) {
+
+		int var = ServicioBibiotecaReporte.EliminarReporte(id);
+		if (var != 0) {
+			return new ResponseEntity<Usuario>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+		}
+	}
+}

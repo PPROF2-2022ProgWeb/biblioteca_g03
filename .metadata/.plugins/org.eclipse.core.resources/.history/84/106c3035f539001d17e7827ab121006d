@@ -1,0 +1,120 @@
+package com.ar.Grupo3.data.objects.classes;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ar.Grupo3.data.objects.interfaces.DaoDevolucionIntf;
+import com.ar.Grupo3.data.objects.repositorio.DevolucionRepositorio;
+import com.ar.Grupo3.data.objects.repositorio.LibroRepositorio;
+import com.ar.Grupo3.data.objects.repositorio.PrestamosRepositorio;
+import com.ar.Grupo3.data.objects.repositorio.UsuarioRepositorio;
+import com.ar.Grupo3.model.Devolucion;
+
+@Service
+public class DaoDevolucionImpl implements Serializable, DaoDevolucionIntf {
+
+	private static final long serialVersionUID = -1371128702457337684L;
+	
+	@Autowired
+	private DevolucionRepositorio dao;
+	
+	@Autowired
+	private LibroRepositorio libro;
+	
+	@Autowired
+	private UsuarioRepositorio usuario;
+	
+	@Autowired
+	private PrestamosRepositorio prestamos;
+
+	@Override
+	public Optional<?> selectPorId(Long id) {
+		
+		Optional<?> aux = null;
+		try {
+			aux = dao.findById(id);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error preguntar al Grupo 3 ==> GestorStock");
+		}
+		
+		return aux;
+	}
+
+	@Override
+	public Long contarTodos() {
+		long cantidad = 0;
+		
+		try {
+			cantidad = dao.count();
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error preguntar al Grupo 3 ==> GestorStock");
+		}		
+		
+		return cantidad;
+	}
+
+	@Override
+	public void agregar(Devolucion p) {
+		try {			
+			if(p.getIdLibro() == null) {
+				throw new Exception("La devolucion que va a registrar no tiene identificador de Libro");
+			}
+			if(p.getIdPrestamo() == null) {
+				throw new Exception("La devolucion que va a registrar no tiene identificador de Prestamo");
+			}
+			if(p.getIdUsuario() == null) {
+				throw new Exception("La devolucion que va a registrar no tiene identificador de Usuario");
+			}
+			dao.save(p);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error preguntar al Grupo 3 ==> GestorStock");
+		}
+	}
+
+	@Override
+	public void modificar(Devolucion p) {
+		try {
+			if(p.getIdDevolucion() == null) {
+				throw new Exception("El objeto a persistir no tiene identificador");
+			}
+			if(p.getIdLibro() == null) {
+				throw new Exception("La devolucion que va a registrar no tiene identificador de Libro");
+			}
+			if(p.getIdPrestamo() == null) {
+				throw new Exception("La devolucion que va a registrar no tiene identificador de Prestamo");
+			}
+			if(p.getIdUsuario() == null) {
+				throw new Exception("La devolucion que va a registrar no tiene identificador de Usuario");
+			}
+			dao.save(p);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error preguntar al Grupo 3 ==> GestorStock");
+		}
+	}
+
+	@Override
+	public void borrar(Devolucion p) {
+		try {
+			dao.delete(p);
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error preguntar al Grupo 3 ==> GestorStock ");
+		}
+	}
+
+	@Override
+	public List<Devolucion> SelectTodos() {
+		List<Devolucion> list = null;
+		try {
+			list = dao.findAll();
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error preguntar al Grupo 3 ==> GestorStock");
+		}
+		return list;
+	}
+
+}

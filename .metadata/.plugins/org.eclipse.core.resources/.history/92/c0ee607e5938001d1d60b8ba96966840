@@ -1,0 +1,48 @@
+package com.ar.Grupo3.data.objects.classes;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.ar.Grupo3.model.Libro;
+
+public class DaoLibroImpl implements com.ar.Grupo3.data.objects.interfaces.DaoLibroIntf, Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public Libro selectPorId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer contarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void agregar(Libro p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void modificar(Libro p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void borrar(Libro p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Libro> SelectTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

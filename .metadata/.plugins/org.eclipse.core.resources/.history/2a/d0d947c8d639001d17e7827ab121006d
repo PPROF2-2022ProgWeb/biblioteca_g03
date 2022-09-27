@@ -1,0 +1,56 @@
+package com.ar.Grupo3.data.factory;
+
+import java.io.Serializable;
+
+import com.ar.Grupo3.data.objects.classes.*;
+import com.ar.Grupo3.data.objects.interfaces.DaoLibroIntf;
+
+public class FabricaDAO implements Serializable {
+	
+	private static final long serialVersionUID = -93933310251647313L;
+	
+	//Para generar instancia de Libro
+	private static DaoLibroIntf libro;
+	public static DaoLibroIntf obtenerLibro() {
+		if(daoLibroImpl == null) {
+			daoLibroImpl = new DaoLibroImpl();
+		}
+		return daoLibroImpl;
+	}
+	
+	//Para generar instancia de Devolucion
+	private static DaoDevolucionImpl daoDevolucionImpl;
+	public static DaoDevolucionImpl obtenerDevolucion() {
+		if(daoDevolucionImpl == null) {
+			daoDevolucionImpl = new DaoDevolucionImpl();
+		}
+		return daoDevolucionImpl;
+	}
+	
+	//Para generar instancia de Prestamos
+	private static DaoPrestamosImpl daoPrestamosImpl;
+	public static DaoPrestamosImpl obtenerPrestamos() {
+		if(daoPrestamosImpl == null) {
+			daoPrestamosImpl = new DaoPrestamosImpl();
+		}
+		return daoPrestamosImpl;
+	}
+	
+	//Para generar instancia de Reporte
+	private static DaoReporteImpl daoReporteImpl;
+	public static DaoReporteImpl obtenerReporte() {
+		if(daoReporteImpl == null) {
+			daoReporteImpl = new DaoReporteImpl();
+		}
+		return daoReporteImpl;
+	}
+	
+	//Para generar instancia de Usuario
+	private static DaoUsuarioImpl daoUsuarioImpl;
+	public static DaoUsuarioImpl obtenerUsuario() {
+		if(daoUsuarioImpl == null) {
+			daoUsuarioImpl = new DaoUsuarioImpl();
+		}
+		return daoUsuarioImpl;
+	}
+}

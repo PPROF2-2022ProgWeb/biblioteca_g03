@@ -1,0 +1,74 @@
+package com.ar.Grupo3.service.wservice;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import com.ar.Grupo3.data.factory.FabricaDAO;
+import com.ar.Grupo3.data.objects.classes.DaoLibroImpl;
+import com.ar.Grupo3.model.Libro;
+
+public class WServiceLibro implements Serializable {
+
+	private static final long serialVersionUID = -872648384162231067L;
+	
+	@Autowired
+	private DaoLibroImpl servicioLibro = FabricaDAO.obtenerLibro();
+	
+	 public WServiceLibro() {
+	        //constructor vacio
+	    }
+
+	// Bucamos todos las Libroes
+	public List<Libro> mostrarLibros() {
+		return servicioLibro.SelectTodos();
+	}
+
+	// Buscamos un Libro por ID
+	public Optional<?> buscarLibroPorId(Long id) {
+		return servicioLibro.selectPorId(id);
+	}
+
+	// Agregamos un por ID
+	public Libro agregamosLibro(Libro Libro) {
+		servicioLibro.agregar(Libro);
+		return Libro;
+	}
+
+	// modificamos Libro
+	public void modificamosLibro(Libro LibroModificado, Long id) {
+		// Verificamos que no nos llegue nulo el id
+		if (id != null) {
+			Optional<?> busca = servicioLibro.selectPorId(id);
+			// Ahora si modificamos la Libro
+			if (busca != null) {
+				servicioLibro.modificar(LibroModificado);
+			}
+		}
+	}
+
+	// Eliminamos la Libro, no se para que esto dudo que pase a menos que...
+	public Integer EliminarLibro(Long id) {
+		Integer aux = 1;
+		// nos fijamos que no nos llegue nulo
+		try {
+			if (id != null) {
+				Libro elimina = new Libro(id);
+				// eliminar el Libro
+				if (elimina != null) {
+					servicioLibro.borrar(elimina);
+					aux = 0;
+				}
+			}
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		return aux;
+	}
+
+}

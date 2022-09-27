@@ -1,0 +1,9 @@
+package com.ar.Grupo3.data.objects.interfaces;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ar.Grupo3.model.Prestamos;
+
+public interface DaoPrestamosIntf extends JpaRepository<Prestamos, Long> {
+
+}

@@ -1,0 +1,47 @@
+package com.ar.Grupo3.data.objects.classes;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.ar.Grupo3.data.objects.interfaces.DaoPrestamosIntf;
+import com.ar.Grupo3.model.Prestamos;
+
+public class DaoPrestamosImpl implements DaoPrestamosIntf, Serializable {
+
+	@Override
+	public Prestamos selectPorId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer contarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void agregar(Prestamos p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void modificar(Prestamos p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void borrar(Prestamos p) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Prestamos> SelectTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

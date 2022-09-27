@@ -1,0 +1,7 @@
+package com.ar.Grupo3.data.factory;
+
+import java.io.Serializable;
+
+public class FabricaDAO implements Serializable {
+
+}

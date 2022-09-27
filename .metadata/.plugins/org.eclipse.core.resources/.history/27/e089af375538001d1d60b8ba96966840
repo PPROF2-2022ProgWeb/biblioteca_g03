@@ -1,0 +1,9 @@
+package com.ar.Grupo3;
+
+import java.io.Serializable;
+
+import com.ar.Grupo3.data.factory.interfaces.Basics;
+
+public class BasicsImpl implements Basics<PDAO>, Serializable {
+
+}

@@ -1,0 +1,74 @@
+package com.ar.Grupo3.data.factory;
+
+import java.io.Serializable;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ar.Grupo3.data.objects.classes.*;
+import com.ar.Grupo3.data.objects.interfaces.DaoDevolucionIntf;
+import com.ar.Grupo3.data.objects.interfaces.DaoLibroIntf;
+import com.ar.Grupo3.data.objects.interfaces.DaoPrestamosIntf;
+import com.ar.Grupo3.data.objects.interfaces.DaoReportesInt;
+import com.ar.Grupo3.data.objects.interfaces.DaoUsuarioIntf;
+
+public class FabricaDAO implements Serializable {
+
+	private static final long serialVersionUID = -5756815546951600719L;
+	
+	public static FabricaDAO(){
+		
+	}
+	
+	// Para generar instancia de Libro
+	@Autowired
+	private DaoLibroIntf libro;
+	public DaoLibroIntf obtenerLibro() {
+		if (libro == null) {
+			libro = new DaoLibroImpl();
+		}
+		return libro;
+	}
+
+	// Para generar instancia de Devolucion
+	@Autowired
+	private DaoDevolucionIntf devolucion;
+
+	public DaoDevolucionIntf obtenerDevolucion() {
+		if (devolucion == null) {
+			devolucion = new DaoDevolucionImpl();
+		}
+		return devolucion;
+	}
+
+	// Para generar instancia de Prestamos
+	@Autowired
+	private DaoPrestamosIntf prestamos;
+
+	public DaoPrestamosIntf obtenerPrestamos() {
+		if (prestamos == null) {
+			prestamos = new DaoPrestamosImpl();
+		}
+		return prestamos;
+	}
+
+	// Para generar instancia de Reporte
+	private DaoReportesInt reporte;
+
+	public DaoReportesInt obtenerReporte() {
+		if (reporte == null) {
+			reporte = new DaoReporteImpl();
+		}
+		return reporte;
+	}
+
+	// Para generar instancia de Usuario
+	
+	@Autowired
+	private DaoUsuarioIntf usuario;
+	public DaoUsuarioIntf obtenerUsuario() {
+		if (usuario == null) {
+			usuario = new DaoUsuarioImpl();
+		}
+		return usuario;
+	}
+}

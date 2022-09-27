@@ -1,0 +1,6 @@
+package com.ar.Grupo3.data.factory.interfaces;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface Basics<PDAO> extends CrudRepository<PDAO, Integer> {
+}

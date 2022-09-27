@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.botonera {
+  display: flex;
+  flex-direction: column;
+}
+
+.card.detalle{
+  position: relative;
+  padding: 2rem 1rem;
+}
+
+.action {
+  margin-top: 1rem;
+}
+
+
+@media screen and (min-width: 768px) {
+  .botonera {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .action {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+  }
+}

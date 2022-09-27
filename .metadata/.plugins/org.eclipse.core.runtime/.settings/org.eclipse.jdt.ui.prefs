@@ -1,0 +1,10 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="com.ar.Grupo3.model.Devolucion"><rhs name\="com.ar.Grupo3.model.Devolucion"/></lhs><lhs name\="org.springframework.http.HttpEntity"><rhs name\="org.springframework.http.ResponseEntity"/></lhs><lhs name\="org.springframework.http.ResponseEntity"><rhs name\="org.springframework.http.ResponseEntity"/></lhs><lhs name\="com.ar.Grupo3.model.Reporte"><rhs name\="com.ar.Grupo3.model.Reporte"/></lhs><lhs name\="com.ar.Grupo3.data.factory.interfaces.PlantillaDAO"><rhs name\="com.ar.Grupo3.data.objects.classes.DaoDevolucionImpl"/><rhs name\="com.ar.Grupo3.data.objects.classes.DaoLibroImpl"/></lhs><lhs name\="com.ar.Grupo3.data.objects.interfaces.DaoDevolucionIntf"><rhs name\="com.ar.Grupo3.data.objects.classes.DaoDevolucionImpl"/></lhs><lhs name\="com.ar.Grupo3.data.objects.classes.DaoLibroImpl"><rhs name\="com.ar.Grupo3.data.objects.classes.DaoLibroImpl"/></lhs><lhs name\="com.ar.Grupo3.data.factory.FabricaDAO"><rhs name\="com.ar.Grupo3.data.factory.FabricaDAO"/></lhs></history>
+content_assist_number_of_computers=15
+eclipse.preferences.version=1
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.formatterprofiles.version=22
+spelling_locale_initialized=true
+typefilter_migrated_2=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

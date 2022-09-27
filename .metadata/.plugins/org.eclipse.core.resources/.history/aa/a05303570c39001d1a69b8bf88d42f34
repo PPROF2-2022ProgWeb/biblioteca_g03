@@ -1,0 +1,50 @@
+package com.ar.Grupo3.data.factory.classes;
+
+import com.ar.Grupo3.data.objects.classes.DaoDevolucionImpl;
+import com.ar.Grupo3.data.objects.interfaces.DaoDevolucionIntf;
+
+public class DaoFabrica {
+
+	//Para instanciar Devolucion
+	private static DaoDevolucionIntf daoDevolucionIntf;
+	public static DaoDevolucionIntf obtenerDevolucion() {
+		if(daoDevolucionIntf == null) {
+			daoDevolucionIntf = new DaoDevolucionImpl();
+		}
+		return daoDevolucionIntf;
+	}
+	
+	//Para instanciar Libro
+	private static DaoLibroIntf daoLibroIntf;
+	public static daoLibroIntf obtenerlibro() {
+		if(daoLibroIntf == null) {
+			daoLibroIntf = new DaoLibroImpl();
+		}
+		return daoLibroIntf;
+	}
+	
+	//Para instancia Reporte
+	private static DaoReporteIntf daoReporteIntf;
+	public static DaoReporteIntf obtenerReporte() {
+		if(daoReporteIntf == null) {
+			daoReporteIntf = new DaoReporteImpl();
+		}
+		return daoReporteIntf;
+	}
+	
+	private static DaoUsuarioIntf daoUsuarioIntf;
+	public static DaoUsuarioIntf obtenerUsuario() {
+		if(daoUsuarioIntf == null) {
+			daoUsuarioIntf = new DaoUsuarioImpl();
+		}
+		return daoUsuarioIntf;
+	}
+	
+	private static DaoPrestamosIntf daoPrestamosIntf;
+	public static DaoPrestamosIntf obtenerPrestamos() {
+		if(daoPrestamosIntf == null) {
+			daoPrestamosIntf = new DaoPrestamosImpl();
+		}
+		return daoPrestamosIntf;
+	}
+}

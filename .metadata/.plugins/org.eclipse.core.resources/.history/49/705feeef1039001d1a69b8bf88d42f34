@@ -1,0 +1,14 @@
+package com.ar.Grupo3.data.factory.interfaces.commons;
+
+import java.io.Serializable;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.ar.Grupo3.data.factory.classes.ClaseBase;
+
+@SuppressWarnings("rawtypes")
+@Repository
+public interface Basics<PDAO extends ClaseBase, IdType extends Serializable> 
+extends JpaRepository<PDAO, IdType> {
+}

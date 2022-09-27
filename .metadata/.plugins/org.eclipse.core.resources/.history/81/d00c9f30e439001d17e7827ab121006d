@@ -1,0 +1,80 @@
+package com.ar.Grupo3.service;
+
+
+@RestController
+@RequestMapping({ "/Biblioteca" })
+public class WServiceBibliotecaGestion {
+
+	// Campos
+//	private WServiceLibro ServicioBibiotecaLibro = new WServiceLibro();
+
+//	private WServiceDevolucion ServicioBibiotecaDevolucion = new WServiceDevolucion();
+//
+//	private WServicePrestamos ServicioBibiotecaPrestamo = new WServicePrestamos();
+//
+//	private WServiceReporte ServicioBibiotecaReporte = new WServiceReporte();
+//
+//	private WServiceUsuario ServicioBibiotecaUsuarios = new WServiceUsuario();
+	
+//	@Autowired
+//	private LibroRepositorio servicioLibro; //Funciona
+
+//	@Autowired
+//	private DaoLibroIntf servicioLibro; //Funciona
+//
+//	@GetMapping(path = "/libro")
+//	public List<Libro> mostrarLibros() {
+//		List<Libro> listaLibros = servicioLibro.SelectTodos();
+//		return listaLibros;
+//	}
+//	/*
+//	 * ----------------------------------------------------------------------------
+//	 * Libros
+//	 * ----------------------------------------------------------------------------
+//	 */
+//
+//	@GetMapping(path = "/libro")
+//	public List<Libro> mostrarLibros() {
+//		List<Libro> listaLibros = ServicioBibiotecaLibro.mostrarLibros();
+//		return listaLibros;
+//	}
+//
+//	@GetMapping(path = "/libro/{id}")
+//	public Optional<?> buscarLibro(@PathVariable("id") Long id) {
+//		return ServicioBibiotecaLibro.buscarLibroPorId(id);
+//	}
+//
+//	@PostMapping(path = "/libro/agregar")
+//	public Libro AgregarLibro(Libro libro) {
+//		return ServicioBibiotecaLibro.agregamosLibro(libro);
+//	}
+//
+//	@PutMapping(path = "/libro/modificar/{id}")
+//	public ResponseEntity<Libro> modificarLibro(@PathVariable("id") Long id, @RequestBody Libro libro) {
+//		if (libro != null) {
+//			ServicioBibiotecaLibro.modificamosLibro(libro, id);
+//			return new ResponseEntity<Libro>(HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<Libro>(HttpStatus.NOT_FOUND);
+//		}
+//	}
+//
+//	@DeleteMapping(path = "/libro/eliminar/{id}")
+//	public ResponseEntity<Libro> eliminarLibro(@PathVariable("id") Long id) {
+//
+//		int var = ServicioBibiotecaLibro.EliminarLibro(id);
+//		if (var != 0) {
+//			return new ResponseEntity<Libro>(HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<Libro>(HttpStatus.NOT_FOUND);
+//		}
+//	}
+
+	
+
+	
+
+	
+
+	
+}

@@ -1,0 +1,7 @@
+package com.ar.Grupo3.service.wservice;
+
+import java.io.Serializable;
+
+public class WServiceLibro implements Serializable {
+
+}

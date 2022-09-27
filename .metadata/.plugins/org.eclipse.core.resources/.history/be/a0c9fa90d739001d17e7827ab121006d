@@ -1,0 +1,71 @@
+package com.ar.Grupo3.service.wservice;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.ar.Grupo3.data.factory.FabricaDAO;
+import com.ar.Grupo3.data.objects.classes.DaoReporteImpl;
+import com.ar.Grupo3.data.objects.interfaces.DaoReportesInt;
+import com.ar.Grupo3.model.Reporte;
+
+public class WServiceReporte implements Serializable {
+
+	private static final long serialVersionUID = 6167268357511330677L;
+	
+	@Autowired
+	private DaoReportesInt servicioReporte = FabricaDAO.obtenerReporte();
+	
+	 public WServiceReporte() {
+	        //constructor vacio
+	    }
+
+	// Bucamos todos las Reportees
+	public List<Reporte> mostrarReportees() {
+		return servicioReporte.SelectTodos();
+	}
+
+	// Buscamos un Reporte por ID
+	public Optional<?> buscarReportePorId(Long id) {
+		return servicioReporte.selectPorId(id);
+	}
+
+	// Agregamos un por ID
+	public Reporte agregamosReporte(Reporte Reporte) {
+		servicioReporte.agregar(Reporte);
+		return Reporte;
+	}
+
+	// modificamos Reporte
+	public void modificamosReporte(Reporte ReporteModificado, Long id) {
+		// Verificamos que no nos llegue nulo el id
+		if (id != null) {
+			Optional<?> busca = servicioReporte.selectPorId(id);
+			// Ahora si modificamos la Reporte
+			if (busca != null) {
+				servicioReporte.modificar(ReporteModificado);
+			}
+		}
+	}
+
+	// Eliminamos la Reporte, no se para que esto dudo que pase a menos que...
+	public Integer EliminarReporte(Long id) {
+		Integer aux = 1;
+		// nos fijamos que no nos llegue nulo
+		try {
+			if (id != null) {
+				Reporte elimina = new Reporte(id);
+				// eliminar el Reporte
+				if (elimina != null) {
+					servicioReporte.borrar(elimina);
+					aux = 0;
+				}
+			}
+		} catch (Exception e) {
+			LogManager.getLogger("Un error ha ocurrido: -> { " + e.getMessage() + " } fin del error ");
+		}
+		return aux;
+	}
+
+}

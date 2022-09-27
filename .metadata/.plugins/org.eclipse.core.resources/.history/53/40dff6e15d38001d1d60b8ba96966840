@@ -1,0 +1,7 @@
+package com.ar.Grupo3.service;
+
+import java.io.Serializable;
+
+public class WServiceDevolucion implements Serializable {
+
+}

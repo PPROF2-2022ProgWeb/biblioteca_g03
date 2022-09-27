@@ -1,0 +1,21 @@
+package com.ar.Grupo3.data.factory.classes;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+
+@Entity
+public abstract class ClaseBase<IdType extends Serializable> {
+
+	private IdType id;
+
+	public IdType getId() {
+		return id;
+	}
+
+	public void setId(IdType id) {
+		this.id = id;
+	}
+	
+	
+}
