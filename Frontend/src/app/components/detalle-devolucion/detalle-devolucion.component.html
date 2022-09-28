@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="title-container">
+    <h3>Afiliado: {{ devolucion.nombreUsuario }}</h3>
+    <p>Descripcion: {{ devolucion.descripcion }}</p>
+  </div>
+  <div class="info">
+    <span>Libro prestado: {{ devolucion.tituloLibro }}</span>
+    <span>Fecha de prestamo: {{ devolucion.prestamo?.dia_prestamo || 'Fecha desconocida' | dateFormatterPipe }}</span>
+    <span>Fecha de devolucion: {{ devolucion.fechaRegreso | dateFormatterPipe}}</span>
+  </div>
+</div>

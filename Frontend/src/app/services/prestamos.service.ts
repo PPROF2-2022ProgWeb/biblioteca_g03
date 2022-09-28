@@ -41,10 +41,13 @@ export class PrestamosService {
         let libros = data[1] as Libro[];
         let usuarios = data[2] as Usuario[];
         prestamos.forEach((p: Prestamo) => {
-          let usuario = usuarios.find((u: Usuario) => u.idUsuario === p.idUsuario)
-          p.nombreUsuario = `${usuario?.apellido}, ${usuario?.nombre}`
+          let usuario = usuarios.find(
+            (u: Usuario) => u.idUsuario === p.idUsuario
+          );
+          p.nombreUsuario = `${usuario?.apellido}, ${usuario?.nombre}`;
           p.tituloLibro =
-            libros.find((u: Libro) => u.idLibro === p.idUsuario)?.titulo || '';
+            libros.find((l: Libro) => l.idLibro === p.idLibro)?.titulo ||
+            'Libro desconocido';
         });
         return { prestamos, libros, usuarios };
       })
@@ -56,23 +59,23 @@ export class PrestamosService {
       .get<Prestamo>(`${this.apiUrl}${this.prestamosUrl}/${id}`)
       .pipe(
         switchMap((prestamo) => {
-            return forkJoin([
-              this.http.get<Libro>(
-                `${this.apiUrl}${this.librosUrl}/${prestamo.idLibro}`
-              ),
-              this.http.get<Usuario>(
-                `${this.apiUrl}${this.usuariosUrl}/${prestamo.idUsuario}`
-              ),
-            ]).pipe(
-              map((data: any[]) => {
-                let libro = data[0] as Libro;
-                let usuario = data[1] as Usuario;
+          return forkJoin([
+            this.http.get<Libro>(
+              `${this.apiUrl}${this.librosUrl}/${prestamo.idLibro}`
+            ),
+            this.http.get<Usuario>(
+              `${this.apiUrl}${this.usuariosUrl}/${prestamo.idUsuario}`
+            ),
+          ]).pipe(
+            map((data: any[]) => {
+              let libro = data[0] as Libro;
+              let usuario = data[1] as Usuario;
 
-                prestamo.nombreUsuario = `${usuario.apellido}, ${usuario.nombre}`
-                prestamo.tituloLibro = libro.titulo
-                return prestamo
-              })
-            );
+              prestamo.nombreUsuario = `${usuario.apellido}, ${usuario.nombre}`;
+              prestamo.tituloLibro = libro.titulo;
+              return prestamo;
+            })
+          );
         })
       );
   }

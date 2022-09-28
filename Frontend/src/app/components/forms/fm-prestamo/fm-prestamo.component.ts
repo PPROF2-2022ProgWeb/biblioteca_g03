@@ -47,28 +47,7 @@ export class FmPrestamoComponent implements OnChanges {
         this.FormAgregarPrestamo.get('libro')?.setValue(this.prestamo.idLibro)
         this.FormAgregarPrestamo.get('fecha_prestamo')?.setValue(formatDate(f_prestamo, 'yyyy-MM-dd', 'en'))
         this.FormAgregarPrestamo.get('fecha_devolucion')?.setValue(formatDate(f_devolucion, 'yyyy-MM-dd', 'en'))
-
-        console.log(this.prestamo.dia_devolucion_estimativo)
-        console.log(this.prestamo.dia_devolucion_estimativo.toLocaleDateString)
       }
-      // if (this.prestamo) {
-      //   this.FormAgregarPrestamo.get('nombre')?.setValue(this.prestamo?.nombre);
-      //   this.FormAgregarPrestamo.get('apellido')?.setValue(
-      //     this.prestamo?.apellido
-      //   );
-      //   this.FormAgregarPrestamo.get('domicilio')?.setValue(
-      //     this.prestamo?.domicilio
-      //   );
-      //   this.FormAgregarPrestamo.get('telefono')?.setValue(
-      //     this.prestamo?.telefono
-      //   );
-      //   this.FormAgregarPrestamo.get('sanciones')?.setValue(
-      //     String(this.prestamo?.sanciones)
-      //   );
-      //   this.FormAgregarPrestamo.get('sanciones_monetarias')?.setValue(
-      //     String(this.prestamo?.sancionesMonetarias)
-      //   );
-      // }
     }
   }
 

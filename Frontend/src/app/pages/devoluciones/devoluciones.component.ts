@@ -16,9 +16,11 @@ import { PrestamosService } from 'src/app/services/prestamos.service';
 export class DevolucionesComponent implements OnInit {
   @ViewChild('contenedorTabla') contenedorTabla: ElementRef;
 
-  public devoluciones: Devolucion[];
+  public devoluciones: Devolucion[] = [];
   public libros: Libro[] = [];
   public usuarios: Usuario[] = [];
+  public prestamos: Prestamo[] = [];
+
   public DevolucionSeleccionada: Devolucion | null;
   public isModalOpen = false;
   public isEditing: boolean = false;
@@ -37,18 +39,16 @@ export class DevolucionesComponent implements OnInit {
       source: 'tituloLibro',
     },
     {
-      name: 'Fecha de prestamo',
-      source: 'dia_prestamo',
-      pipe: DateFormatterPipe,
+      name: 'Fecha de devolucion',
+      source: 'fechaRegreso',
     },
     {
-      name: 'Fecha de devolucion',
-      source: 'dia_devolucion_estimativo',
-      pipe: DateFormatterPipe,
+      name: 'Observaciones',
+      source: 'descripcion',
     },
   ];
 
-  constructor(private devolucionesService: DevolucionesService) {}
+  constructor(private devolucionesService: DevolucionesService, private prestamosService: PrestamosService) {}
 
   ngOnInit(): void {
     this.cargarDatos();
@@ -62,10 +62,11 @@ export class DevolucionesComponent implements OnInit {
         this.libros = libros;
         this.usuarios = usuarios;
       });
+    this.prestamosService.cargarDatos().subscribe((data) => this.prestamos = data.prestamos)
   }
 
   cargarDetalleDevolucion(e: IDataTableSelectionChanged): void {
-    let id = e.current.item['idPrestamo'];
+    let id = e.current.item['idDevolucion'];
     this.devolucionesService.cargarDevolucionById(id).subscribe((data) => {
       this.DevolucionSeleccionada = data;
     });
@@ -73,7 +74,7 @@ export class DevolucionesComponent implements OnInit {
 
   eliminarDevolucion(): void {
     if (this.DevolucionSeleccionada && this.DevolucionSeleccionada.idDevolucion) {
-      let id = this.DevolucionSeleccionada.idPrestamo as number;
+      let id = this.DevolucionSeleccionada.idDevolucion as number;
       this.devolucionesService.eliminarDevolucion(id).subscribe(() => {
         this.cargarDatos();
       });
@@ -96,6 +97,8 @@ export class DevolucionesComponent implements OnInit {
   }
 
   onSubmit(devolucion: Devolucion) {
+    console.log('submit ok')
+    console.log(devolucion);
     if (this.isEditing) {
       this.editarDevolucion(devolucion);
     } else {

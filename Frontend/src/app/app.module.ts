@@ -17,7 +17,6 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { NoEncontradoComponent } from './pages/no-encontrado/no-encontrado.component';
 import { DynamicPipe } from './pipes/dynamic.pipe';
 import { LogoComponent } from './components/logo/logo.component';
-import { ReportesComponent } from './pages/reportes/reportes.component';
 import { LibrosComponent } from './pages/libros/libros.component';
 import { DevolucionesComponent } from './pages/devoluciones/devoluciones.component';
 import { PrestamosComponent } from './pages/prestamos/prestamos.component';
@@ -31,6 +30,8 @@ import { FmUsuarioComponent } from './components/forms/fm-usuario/fm-usuario.com
 import { DateFormatterPipe } from './pipes/date-formatter.pipe';
 import { FmPrestamoComponent } from './components/forms/fm-prestamo/fm-prestamo.component';
 import { DetallePrestamoComponent } from './components/detalle-prestamo/detalle-prestamo.component';
+import { DetalleDevolucionComponent } from './components/detalle-devolucion/detalle-devolucion.component';
+import { FmDevolucionComponent } from './components/forms/fm-devolucion/fm-devolucion.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,6 @@ import { DetallePrestamoComponent } from './components/detalle-prestamo/detalle-
     DynamicPipe,
     NavlinkComponent,
     LogoComponent,
-    ReportesComponent,
     LibrosComponent,
     DevolucionesComponent,
     PrestamosComponent,
@@ -59,7 +59,9 @@ import { DetallePrestamoComponent } from './components/detalle-prestamo/detalle-
     FmUsuarioComponent,
     DateFormatterPipe,
     FmPrestamoComponent,
-    DetallePrestamoComponent
+    DetallePrestamoComponent,
+    DetalleDevolucionComponent,
+    FmDevolucionComponent
   ],
   imports: [
     BrowserModule,

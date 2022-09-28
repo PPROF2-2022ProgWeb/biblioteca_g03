@@ -1,7 +1,7 @@
 <div class="container">
   <div class="botonera">
     <app-button bordered square centered (onClick)="openModal()">
-      Agregar prestamo
+      Agregar devolucion
     </app-button>
     <app-button
       bordered
@@ -10,7 +10,7 @@
       (onClick)="startEdit()"
       [disabled]="!DevolucionSeleccionada"
     >
-      Editar prestamo
+      Editar devolucion
     </app-button>
   </div>
 
@@ -27,42 +27,43 @@
     </div>
     <app-aviso
       *ngIf="devoluciones.length === 0"
-      titulo="Tabla de Prestamos"
-      mensaje="Aqui se mostraran los prestamos que se carguen desde la base de datos"
+      titulo="Tabla de Devoluciones"
+      mensaje="Aqui se mostraran los devoluciones que se carguen desde la base de datos"
     ></app-aviso>
   </div>
 
-  <!-- <div class="card detalle">
-    <app-detalle-prestamo
-      *ngIf="PrestamoSeleccionado"
-      [prestamo]="PrestamoSeleccionado"
-    ></app-detalle-prestamo>
+  <div class="card detalle">
+    <app-detalle-devolucion
+      *ngIf="DevolucionSeleccionada"
+      [devolucion]="DevolucionSeleccionada"
+    ></app-detalle-devolucion>
     <app-aviso
-      *ngIf="!PrestamoSeleccionado"
-      titulo="Detalles del Prestamo"
-      mensaje="Aqui se mostraran los detalles del Prestamo que seleccione en la tabla"
+      *ngIf="!DevolucionSeleccionada"
+      titulo="Detalles de la devolucion"
+      mensaje="Aqui se mostraran los detalles de la devolucion que seleccione en la tabla"
     ></app-aviso>
     <div class="action">
       <app-button
-        *ngIf="PrestamoSeleccionado"
+        *ngIf="DevolucionSeleccionada"
         square
         centered
         bordered
-        (onClick)="eliminarPrestamo()"
+        (onClick)="eliminarDevolucion()"
       >
-        Eliminar prestamo
+        Eliminar devolucion
       </app-button>
     </div> 
-  </div> -->
+  </div>
 
-  <!-- <app-modal [(isOpen)]="isModalOpen">
-    <app-fm-prestamo
+  <app-modal [(isOpen)]="isModalOpen">
+    <app-fm-devolucion
       [titulo]="tituloModal"
-      [prestamo]="isEditing ? PrestamoSeleccionado : undefined"
+      [devolucion]="isEditing ? DevolucionSeleccionada : undefined"
       [libros]="libros"
       [usuarios]="usuarios"
+      [prestamos]="prestamos"
       (onCancel)="onCancel()"
       (onSubmit)="onSubmit($event)"
-    ></app-fm-prestamo>
-  </app-modal> -->
+    ></app-fm-devolucion>
+  </app-modal>
 </div>
