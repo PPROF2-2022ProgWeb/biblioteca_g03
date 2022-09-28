@@ -32,6 +32,7 @@ import { FmPrestamoComponent } from './components/forms/fm-prestamo/fm-prestamo.
 import { DetallePrestamoComponent } from './components/detalle-prestamo/detalle-prestamo.component';
 import { DetalleDevolucionComponent } from './components/detalle-devolucion/detalle-devolucion.component';
 import { FmDevolucionComponent } from './components/forms/fm-devolucion/fm-devolucion.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { FmDevolucionComponent } from './components/forms/fm-devolucion/fm-devol
     FmPrestamoComponent,
     DetallePrestamoComponent,
     DetalleDevolucionComponent,
-    FmDevolucionComponent
+    FmDevolucionComponent,
+    SearchbarComponent
   ],
   imports: [
     BrowserModule,

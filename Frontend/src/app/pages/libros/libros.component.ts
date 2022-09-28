@@ -3,8 +3,11 @@ import {
   IDataTableColumn,
   IDataTableSelectionChanged,
 } from 'src/app/interfaces/dataTable';
+import { ISearchResult } from 'src/app/interfaces/searchResult';
 import { Libro } from 'src/app/models/Libro';
+import { Prestamo } from 'src/app/models/Prestamo';
 import { LibrosService } from 'src/app/services/libros.service';
+import { PrestamosService } from 'src/app/services/prestamos.service';
 
 @Component({
   selector: 'app-libros',
@@ -15,8 +18,10 @@ export class LibrosComponent implements OnInit {
   @ViewChild('contenedorTabla') contenedorTabla: ElementRef;
 
   public Libros: Libro[] = [];
+  public librosFiltrados: Libro[] = [];
   public LibroSeleccionado: Libro | null;
   public isModalOpen = false;
+  public isModalSolicitudOpen = false;
   public isEditing: boolean = false;
 
   public get tituloModal(): string {
@@ -50,7 +55,10 @@ export class LibrosComponent implements OnInit {
     },
   ];
 
-  constructor(private librosService: LibrosService) {}
+  constructor(
+    private librosService: LibrosService,
+    private prestamosService: PrestamosService
+  ) {}
 
   ngOnInit(): void {
     this.cargarLibros();
@@ -59,6 +67,7 @@ export class LibrosComponent implements OnInit {
   cargarLibros() {
     return this.librosService.cargarLibros().subscribe((data) => {
       this.Libros = data;
+      this.librosFiltrados = data;
       this.LibroSeleccionado = null;
     });
   }
@@ -85,24 +94,43 @@ export class LibrosComponent implements OnInit {
     });
   }
 
-  eliminarLibro(){
-    if(this.LibroSeleccionado && this.LibroSeleccionado.idLibro){
-      let id = this.LibroSeleccionado.idLibro as number
+  eliminarLibro() {
+    if (this.LibroSeleccionado && this.LibroSeleccionado.idLibro) {
+      let id = this.LibroSeleccionado.idLibro as number;
       this.librosService.eliminarLibro(id).subscribe(() => {
         this.cargarLibros();
       });
     }
   }
 
-  onSubmit(libro: Libro) {
-    if (this.isEditing) {
-      this.editarLibro(libro);
-    } else {
-      this.agregarLibro(libro);
+  solicitarPrestamo() {
+    this.isModalSolicitudOpen = true;
+  }
+
+  onSubmitSolicitud(prestamo: Prestamo) {
+    console.log(prestamo);
+    if (prestamo) {
+      this.prestamosService.agregarPrestamo(prestamo).subscribe((data) => {
+        if (this.LibroSeleccionado) {
+          this.LibroSeleccionado.disponibles -= 1;
+          this.editarLibro(this.LibroSeleccionado);
+        }
+      });
+
+      this.isModalSolicitudOpen = false;
     }
   }
 
-  onCancel(){
+  // onSubmit(libro: Libro) {
+  //   if (this.isEditing) {
+  //     this.editarLibro(libro);
+  //   } else {
+  //     this.agregarLibro(libro);
+  //   }
+  // }
+
+  onCancel() {
+    this.isModalSolicitudOpen = false;
     this.isModalOpen = false;
     this.isEditing = false;
   }
@@ -114,5 +142,10 @@ export class LibrosComponent implements OnInit {
   startEdit() {
     this.isEditing = true;
     this.openModal();
+  }
+
+  onSearchDone(e: ISearchResult) {
+    console.log(e.result);
+    this.librosFiltrados = e.result as Libro[];
   }
 }

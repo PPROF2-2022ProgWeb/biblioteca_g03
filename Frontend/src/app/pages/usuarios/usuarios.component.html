@@ -1,18 +1,4 @@
 <div class="container">
-  <div class="botonera">
-    <app-button bordered square centered (onClick)="openModal()">
-      Agregar usuario
-    </app-button>
-    <app-button
-      bordered
-      square
-      centered
-      (onClick)="startEdit()"
-      [disabled]="!UsuarioSeleccionado"
-    >
-      Editar usuario
-    </app-button>
-  </div>
 
   <div class="card">
     <div #contenedorTabla>
@@ -42,17 +28,6 @@
       titulo="Detalles del Usuario"
       mensaje="Aqui se mostraran los detalles del Usuario que seleccione en la tabla"
     ></app-aviso>
-    <div class="action">
-      <app-button
-        *ngIf="UsuarioSeleccionado"
-        square
-        centered
-        bordered
-        (onClick)="eliminarUsuario()"
-      >
-        Eliminar usuario
-      </app-button>
-    </div> 
   </div>
 
   <app-modal [(isOpen)]="isModalOpen">

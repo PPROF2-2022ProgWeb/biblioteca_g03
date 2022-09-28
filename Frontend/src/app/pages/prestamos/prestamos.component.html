@@ -1,18 +1,4 @@
 <div class="container">
-  <div class="botonera">
-    <app-button bordered square centered (onClick)="openModal()">
-      Agregar prestamo
-    </app-button>
-    <app-button
-      bordered
-      square
-      centered
-      (onClick)="startEdit()"
-      [disabled]="!PrestamoSeleccionado"
-    >
-      Editar prestamo
-    </app-button>
-  </div>
 
   <div class="card">
     <div #contenedorTabla>
@@ -31,38 +17,4 @@
       mensaje="Aqui se mostraran los prestamos que se carguen desde la base de datos"
     ></app-aviso>
   </div>
-
-  <div class="card detalle">
-    <app-detalle-prestamo
-      *ngIf="PrestamoSeleccionado"
-      [prestamo]="PrestamoSeleccionado"
-    ></app-detalle-prestamo>
-    <app-aviso
-      *ngIf="!PrestamoSeleccionado"
-      titulo="Detalles del Prestamo"
-      mensaje="Aqui se mostraran los detalles del Prestamo que seleccione en la tabla"
-    ></app-aviso>
-    <div class="action">
-      <app-button
-        *ngIf="PrestamoSeleccionado"
-        square
-        centered
-        bordered
-        (onClick)="eliminarPrestamo()"
-      >
-        Eliminar prestamo
-      </app-button>
-    </div> 
-  </div>
-
-  <app-modal [(isOpen)]="isModalOpen">
-    <app-fm-prestamo
-      [titulo]="tituloModal"
-      [prestamo]="isEditing ? PrestamoSeleccionado : undefined"
-      [libros]="libros"
-      [usuarios]="usuarios"
-      (onCancel)="onCancel()"
-      (onSubmit)="onSubmit($event)"
-    ></app-fm-prestamo>
-  </app-modal>
 </div>

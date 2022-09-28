@@ -1,24 +1,18 @@
 <div class="container">
-  <div class="botonera">
-    <app-button bordered square centered (onClick)="openModal()">
-      Agregar libro
-    </app-button>
-    <app-button
-      bordered
-      square
-      centered
-      (onClick)="startEdit()"
-      [disabled]="!LibroSeleccionado"
-    >
-      Editar libro
-    </app-button>
+  <div class="card">
+    <search-bar
+      searchProperty="titulo"
+      placeholder="Busqueda por titulo del libro"
+      [source]="Libros"
+      triggerOnInput
+      (searchDone)="onSearchDone($event)"
+    ></search-bar>
   </div>
-
   <div class="card">
     <div #contenedorTabla>
       <data-table
         *ngIf="Libros.length > 0"
-        [source]="Libros"
+        [source]="librosFiltrados || Libros"
         [columns]="tableColumns"
         tableStyle="bordered"
         [maxHeight]="500"
@@ -48,19 +42,34 @@
         square
         centered
         bordered
-        (onClick)="eliminarLibro()"
+        (onClick)="solicitarPrestamo()"
       >
-        Eliminar libro
+        Solicitar prestamo
       </app-button>
     </div>
   </div>
 
-  <app-modal [(isOpen)]="isModalOpen">
+  <!-- <app-modal [(isOpen)]="isModalOpen">
     <app-fm-libro
       (onSubmit)="onSubmit($event)"
       (onCancel)="onCancel()"
       [titulo]="tituloModal"
       [libro]="isEditing ? LibroSeleccionado : undefined"
     ></app-fm-libro>
+  </app-modal> -->
+
+  <app-modal [(isOpen)]="isModalSolicitudOpen">
+    <div *ngIf="LibroSeleccionado && LibroSeleccionado.disponibles > 0; else noDisponible">
+      <app-fm-prestamo
+        titulo="Solicitar prestamo"
+        [libro]="LibroSeleccionado"
+        (onCancel)="onCancel()"
+        (onSubmit)="onSubmitSolicitud($event)"
+      ></app-fm-prestamo>
+    </div>
+
+    <ng-template #noDisponible>
+      <app-aviso titulo="Libro no disponible" mensaje="No hay ejemplares disponibles para prestamo"></app-aviso>
+    </ng-template>
   </app-modal>
 </div>
