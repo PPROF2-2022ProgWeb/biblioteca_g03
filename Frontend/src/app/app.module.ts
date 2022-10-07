@@ -33,6 +33,7 @@ import { DetallePrestamoComponent } from './components/detalle-prestamo/detalle-
 import { DetalleDevolucionComponent } from './components/detalle-devolucion/detalle-devolucion.component';
 import { FmDevolucionComponent } from './components/forms/fm-devolucion/fm-devolucion.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,7 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [DateFormatterPipe, DynamicPipe],
+  providers: [DateFormatterPipe, DynamicPipe, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

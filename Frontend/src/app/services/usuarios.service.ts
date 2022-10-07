@@ -19,7 +19,6 @@ export class UsuariosService {
   constructor(private http: HttpClient) {}
 
   agregarUsuario(usuario: Usuario): Observable<Usuario> {
-    console.log(JSON.stringify(usuario));
     return this.http.post<Usuario>(`${this.apiUrl}${this.usuariosUrl}/agregar`, JSON.stringify(usuario), this.httpOptions)
   }
 

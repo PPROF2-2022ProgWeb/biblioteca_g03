@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   IDataTableColumn,
@@ -48,6 +49,7 @@ export class LibrosComponent implements OnInit {
     {
       name: 'Stock',
       source: 'stock',
+      pipe: CurrencyPipe
     },
     {
       name: 'Disponibles',
